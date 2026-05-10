@@ -1,0 +1,220 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Copper.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5809036275711681 0.5817570076907073 0.569306384539478 2.0981611594802905
+  position 0.5365861310770951 0.7204390016518863 3.2147912560568925
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Robot {
+  translation -0.0799783 1.13493 0.0853145
+  rotation -0.0018354059161543503 0.001837387990613339 0.999996627639561 1.5708205269331288
+  children [
+    DistanceSensor {
+      translation -0.155 0 -0.05
+      rotation 0 -1 0 -1.5708
+      children [
+        Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ir_center"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation -0.155 0.04 -0.05
+      rotation 0 -1 0 -1.5708
+      children [
+        Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ir_right"
+      type "infra-red"
+    }
+    Solid {
+      translation -0.05 0 -0.05
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.819608 0.478431
+            }
+          }
+          geometry Box {
+            size 0.2 0.1 0.01
+          }
+        }
+      ]
+      name "front panel"
+      boundingObject Box {
+        size 0.2 0.1 0.01
+      }
+      physics Physics {
+        mass 0.01
+      }
+    }
+    DistanceSensor {
+      translation -0.155 -0.04 -0.05
+      rotation 0 -1 0 -1.5708
+      children [
+        Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ir_left"
+      type "infra-red"
+    }
+    Solid {
+      translation 0.03 0 -0.05
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.6 0.756863 0.945098
+            }
+          }
+          geometry Sphere {
+            radius 0.02
+          }
+        }
+      ]
+      name "caster wheel"
+      boundingObject Sphere {
+        radius 0.02
+      }
+      physics Physics {
+        mass 0.1
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -7.421461065544758
+        axis 0 1 0
+        anchor -0.01 -0.0599936 -0.0199921
+      }
+      device [
+        PositionSensor {
+          name "left_encoder"
+        }
+        RotationalMotor {
+          name "left_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.009994608355321372 -0.05999628456662709 -0.01999690469837516
+        rotation 0.7415418835423505 -0.4744016931044412 0.47440348705727536 1.8654648325332204
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0.898039 0.647059 0.0392157
+              }
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.05
+            }
+          }
+        ]
+        name "left wheel"
+        boundingObject Shape {
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+        physics Physics {
+          mass 0.1
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -7.4214613150835085
+        axis 0 1 0
+        anchor -0.01 0.0599936 -0.0199921
+      }
+      device [
+        PositionSensor {
+          name "right_encoder"
+        }
+        RotationalMotor {
+          name "right_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.009996766717261784 0.059990876600771514 -0.01999747232561257
+        rotation 0.7415417918343481 -0.4744017647796845 0.4744035587314088 1.8654649508775354
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor 0.898039 0.647059 0.0392157
+              }
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.05
+            }
+          }
+        ]
+        name "right wheel"
+        boundingObject Shape {
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+        physics Physics {
+          mass 0.1
+        }
+      }
+    }
+    Shape {
+      appearance Copper {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  controller "line_follower_logic"
+}
+Floor {
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "../../Images/Canva bold.png"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+    }
+    roughness 1
+    textureTransform TextureTransform {
+      center 1.8 1.5
+      scale 0.17 0.17
+    }
+  }
+}
